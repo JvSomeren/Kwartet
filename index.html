@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Kwartet</title>
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.6.2/css/bulma.min.css" integrity="sha256-2k1KVsNPRXxZOsXQ8aqcZ9GOOwmJTMoOB5o5Qp1d6/s=" crossorigin="anonymous" />
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <section class="hero is-dark">
+    <div class="hero-body">
+      <div class="container">
+        <h1 class="title">
+          Kwartet
+        </h1>
+        <h2 class="subtitle">
+          Joost van Someren
+        </h2>
+      </div>
+    </div>
+  </section>
+
+  <section id="lobby" class="section">
+    <div class="container">
+      <form id="lobby-form">
+        <div class="field">
+          <label for="number-of-players" class="label">Aantal spelers</label>
+          <div class="control">
+            <input id="number-of-players" name="number-of-players"
+                class="input is-focused" type="number" min="3" max="12" 
+                placeholder="Aantal spelers" required>
+          </div>
+        </div>
+  
+        <div class="field">
+          <div class="control">
+            <button class="button is-primary">Start spel</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </section>
+
+  <section id="game" class="section">
+    <div class="container">
+      <div id="turn-container">
+        <h2><span id="turn-playername"></span>'s beurt!</h2>
+
+        <form id="turn-form">
+          <div class="field has-addons has-addons-centered">
+            <p class="control">
+              <span class="select">
+                <select id="turn-form-category">
+
+                </select>
+              </span>
+            </p>
+
+            <p class="control">
+              <span class="select">
+                <select id="turn-form-object">
+
+                </select>
+              </span>
+            </p>
+
+            <p class="control">
+              <span class="select">
+                <select id="turn-form-player">
+
+                </select>
+              </span>
+            </p>
+
+            <p class="control">
+              <button class="button is-primary">
+                Vraag
+              </button>
+            </p>
+          </div>
+        </form>
+      </div>
+
+      <div id="player-hands" class="columns">
+
+      </div>
+    </div>
+  </section>
+  
+  <script src="js/script.js"></script>
+</body>
+</html>
