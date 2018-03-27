@@ -40,6 +40,17 @@ function shuffle(arr) {
   return arr;
 }
 
+/**
+ * compare
+ * 
+ * Compare given parameters;
+ *  -1 if b is larger
+ *  1 if a is larger
+ *  0 if a and b are equal
+ * 
+ * @param {*} a 
+ * @param {*} b 
+ */
 function compare(a,b) {
   if (a.object < b.object)
     return -1;
@@ -77,10 +88,26 @@ function buildAndShuffleDeck(cat, obj) {
   return shuffle(deck);
 }
 
+/**
+ * sortPlayerHand
+ * 
+ * Sort the hand of a given player.
+ * 
+ * @param {integer} index 
+ */
 function sortPlayerHand(index) {
   players[index].deck.sort(compare);
 }
 
+/**
+ * dealDeck
+ * 
+ * Split the given deck array among the number of given players.
+ * End by sorting the dealt hands.
+ * 
+ * @param {array} deck 
+ * @param {integer} numOfPlayers 
+ */
 function dealDeck(deck, numOfPlayers) {
   for(let i = 0; i < numOfPlayers; i++) {
     players[i] = {
@@ -98,6 +125,15 @@ function dealDeck(deck, numOfPlayers) {
   }
 }
 
+/**
+ * checkForKwartet
+ * 
+ * Check for a given player if this player has all card of the
+ * same category in his hands. If so increase his/her points by 1 and
+ * remove the cards from its hand.
+ * 
+ * @param {integer} index 
+ */
 function checkForKwartet(index) {
   let lastObj = "";
   let consecutive = 1;
@@ -108,6 +144,7 @@ function checkForKwartet(index) {
     if(players[index].deck[i].object === lastObj) {
       consecutive++;
 
+      // if kwartet
       if(consecutive === categories.length) {
         players[index].deck.splice(i - categories.length + 1, categories.length);
         players[index].score++;
@@ -120,7 +157,9 @@ function checkForKwartet(index) {
 }
 
 /**
+ * setElePlayerHands
  * 
+ * Create DOM elements for each player's hand.
  */
 function setElePlayerHands() {
   while(elePlayerHands.firstChild) {
@@ -144,6 +183,11 @@ function setElePlayerHands() {
   }
 }
 
+/**
+ * prepareTurn
+ * 
+ * Create DOM from elements for the player's action
+ */
 function prepareTurn() {
   eleTurnPlayername.innerText = "Player " + (currentPlayerIndex + 1);
 
@@ -181,6 +225,10 @@ function prepareTurn() {
 }
 
 /**
+ * startGame
+ * 
+ * On game start create the hands for all players and check if a
+ * player has a kwartet.
  * 
  * @param {event} e 
  */
@@ -206,6 +254,16 @@ function startGame(e) {
   }
 }
 
+/**
+ * isCardInPlayerHand
+ * 
+ * Check if a card with a given category and object is in
+ * the hand of a specific player.
+ * 
+ * @param {string} cat 
+ * @param {string} obj 
+ * @param {integer} index 
+ */
 function isCardInPlayerHand(cat, obj, index) {
   if(players[index].deck.some(e => e.category === cat && e.object === obj)) {
     return true;
@@ -214,6 +272,15 @@ function isCardInPlayerHand(cat, obj, index) {
   return false;
 }
 
+/**
+ * Remove the card which matches the given category and object from
+ * the hand of a specific player.
+ * Add this card to the hand of the current player.
+ * 
+ * @param {string} cat 
+ * @param {string} obj 
+ * @param {integer} index 
+ */
 function updatePlayersHands(cat, obj, index) {
   const card = {
     category: cat,
@@ -227,6 +294,13 @@ function updatePlayersHands(cat, obj, index) {
   sortPlayerHand(currentPlayerIndex);
 }
 
+/**
+ * processTurn
+ * 
+ * 
+ * 
+ * @param {event} e 
+ */
 function processTurn(e) {
   e.preventDefault();
   eleTurnFormButton.disabled = true;
